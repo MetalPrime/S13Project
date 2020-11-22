@@ -56,13 +56,13 @@ public class ContactAdapter extends BaseAdapter {
         TextView setNameContact = renglonView.findViewById(R.id.setNameContact);
         TextView setContactNumber = renglonView.findViewById(R.id.setContactNumber);
 
-        setNameContact.setText(contact.getContactName());
-        setContactNumber.setText((""+contact.getContactNumber()));
+        setNameContact.setText(contact.getName());
+        setContactNumber.setText((""+contact.getPhone()));
 
         btnCall.setOnClickListener(
                 (v)->{
                     Intent i = new Intent(Intent.ACTION_CALL);
-                    i.setData(Uri.parse("tel:"+contact.getContactNumber()));
+                    i.setData(Uri.parse("tel:"+contact.getPhone()));
                     lista.getContext().startActivity(i);
                 }
         );

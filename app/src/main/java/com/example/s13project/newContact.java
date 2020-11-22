@@ -2,19 +2,12 @@ package com.example.s13project;
 
 public class newContact {
     private String id;
-    private String userName;
-    private String contactName;
-    private String contactNumber;
+    private String name;
+    private String phone;
+    private String uid;
 
     public  newContact(){
 
-    }
-
-    public newContact(String id, String userName, String contactName, String contactNumber) {
-        this.id = id;
-        this.userName = userName;
-        this.contactName = contactName;
-        this.contactNumber = contactNumber;
     }
 
     public String getId() {
@@ -25,27 +18,36 @@ public class newContact {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContactName() {
-        return contactName;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getUid() {
+        return uid;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
+
+    public newContact(String id, String name, String phone, String uid) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.uid = uid;
+    }
+
+
 }

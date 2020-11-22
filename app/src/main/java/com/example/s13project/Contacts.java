@@ -35,6 +35,7 @@ public class Contacts extends AppCompatActivity {
     private ContactAdapter adapter;
     private String username;
     private Button btnSignOut;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +60,23 @@ public class Contacts extends AppCompatActivity {
                     Manifest.permission.CALL_PHONE,
             }, 1);
 
+            if(auth.getCurrentUser()!=null){
+                uid = auth.getCurrentUser().getUid();
+            }
+
             loadDatabase();
 
             btnAddContact.setOnClickListener(
                     (view) ->{
-                        String id = UUID.randomUUID().toString();
+                        DatabaseReference newContactRef = database.getReference().child("semana14").child("contacts").push();
                         newContact contact = new newContact(
-                                id,
-                                username,
+                                newContactRef.getKey(),
                                 contactName.getText().toString(),
-                                contactNumber.getText().toString()
+                                contactNumber.getText().toString(),
+                                uid
                         );
-                        Log.e("fdsxcdv", contact + "");
-                        database.getReference("contacts").child(id).setValue(contact);
+
+                        newContactRef.setValue(contact);
                     }
             );
 
@@ -94,7 +99,7 @@ public class Contacts extends AppCompatActivity {
     }
 
     private void loadDatabase() {
-        DatabaseReference ref = database.getReference().child("contacts");
+        DatabaseReference ref = database.getReference().child("semana14").child("contacts");
         ref.addValueEventListener(
                 new ValueEventListener() {
                     @Override
@@ -102,7 +107,7 @@ public class Contacts extends AppCompatActivity {
                         adapter.clear();
                         for (DataSnapshot child : snapshot.getChildren()) {
                             newContact contact = child.getValue(newContact.class);
-                            if(contact.getUserName().equals(username)){
+                            if(contact.getUid().equals(uid)){
                                 adapter.addContact(contact);
                             }
                         }
